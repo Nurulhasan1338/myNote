@@ -1,0 +1,47 @@
+.active{
+    font-size: large;
+    border-bottom: 3px solid white;
+}
+*{
+    margin: 0;
+    padding: 0;
+}
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Square+Peg&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
+
+
+.box{
+    height: 10rem;
+
+}
+.Text{
+    overflow-wrap: break-word;
+    font-family: 'Square Peg', cursive;
+    font-size: 30px;
+}
+.Text::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.Text::-webkit-scrollbar
+{
+	width: 6px;
+	background-color: #F5F5F5;
+}
+
+.Text::-webkit-scrollbar-thumb
+{
+	background-color: #000000;
+}
+.TText{
+    overflow-wrap: break-word;
+    font-family: 'Square Peg', cursive;
+    font-size: 60px;
+}
+
+.notesItem{
+    overflow-y: hidden
+}

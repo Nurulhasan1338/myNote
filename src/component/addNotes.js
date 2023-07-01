@@ -2,14 +2,13 @@ import React,{useContext,useState} from 'react'
 import notecontext from "./context/Notes/Notecontext.js"; 
 
 
-
 export default function AddNotes() {
     
     const context = useContext(notecontext);         // for using addnote function which we made in notestate
     const {addnotes} = context;
 
     // for defining temprally note
-    const [note, setNote] = useState({title:"",description:"",tag:"default"})
+    const [note, setNote] = useState({title:"",description:"",tag:"default",color:`hsl(${Math.floor(Math.random() * 300)}deg 100% 80%)`})
     const onChange=(e)=>{
         setNote({...note,[e.target.name]:e.target.value})
     }
@@ -19,6 +18,9 @@ export default function AddNotes() {
     }
 
   return (
+
+
+  
     <div className="w-100 shadow rounded p-1">
       <h2>
         <i className="fa-regular fa-pen-to-square mx-1"></i>Add your notes
