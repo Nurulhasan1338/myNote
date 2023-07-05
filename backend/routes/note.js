@@ -28,7 +28,7 @@ router.post("/addnote",fetchuser,
   ],async (req, res) => {
 
     try {
-    const {title,description,tag} = req.body;
+    const {title,description,tag,color} = req.body;
     // if there is an error return bad request
     const errors = validationResult(req); // to check weather name is valide or not
     if (!errors.isEmpty()) {
@@ -36,7 +36,7 @@ router.post("/addnote",fetchuser,
     }
     
     const note = new Notes({
-        title,description,tag,user:req.user.id
+        title,description,tag,color,user:req.user.id
     })
     const savedNote = await note.save();
     res.json(savedNote);
@@ -52,13 +52,14 @@ router.post("/addnote",fetchuser,
 // Route # 3 updating note of the user using "http://localhost:5000/api/note/updatenote/:id"
 router.put("/updatenote/:id",fetchuser,async (req,res)=>{
   try {
-    const {title,description,tag} = req.body;
+    const {title,description,tag,color} = req.body;
     // creating new note object
     newNote = {};
     // storing the updated value in newNote
     if(title) {newNote.title=title;}
     if(description) {newNote.description=description;}
     if(tag) {newNote.tag=tag;}
+    if(color) {newNote.color=color}
   //  find the note and update it  
   let note = await Notes.findById(req.params.id);
   // if the id note the note is note present in database then return bad reqest

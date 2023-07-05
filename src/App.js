@@ -4,6 +4,7 @@ import About from "./component/About.js";
 import "./main.css";
 import AddNotes from "./component/addNotes.js";
 import Notesate from "./component/context/Notes/Notesate.js";
+import Alert from "./component/Alert.js";
 import {
   HashRouter as Router,
   Route,
@@ -13,20 +14,18 @@ import {
 function App() {
   return (
     <div className="App">
-      <Notesate>
-      <Router>
+    <Notesate>
+    <Router>
     <Navbar/>
-
+    <Alert alert={alert}/>
     <Routes>
     <Route path='/' element={<Home key="Home"/>} /> 
     <Route path='/about' element={<About key="About"/>} /> 
     <Route path='/addnotes' element={<AddNotes key="addnotes"/>} /> 
-   
     </Routes>
+  </Router>
 
-      </Router>
-
-      </Notesate>
+  </Notesate>
     </div>
   );
 }

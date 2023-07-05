@@ -3,91 +3,132 @@ import { useState } from 'react';
 import NoteContext from './Notecontext.js';
 
 export default function Notesate(props) {
-  const Notes= [
-    {
-      "_id": "632ff967fc70a673499d1a1f",
-      "user": "631ecc1f5298db6a4ad9be46",
-      "title": "Note 1",
-      "color" : `hsl(${Math.floor(Math.random() * 300)}deg 100% 80%)`,
-      "description": "hello this is my first note on my application hello this is my first note on my application hello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my application",
-      "tag": "imp",
-      "date": "2022-09-25T06:47:03.381Z",
-      "__v": 0
-    },
-    {
-      "_id": "632ff968fc70a673499d1a25",
-      "user": "631ecc1f5298db6a4ad9be46",
-      "title": "Note 2",
-      "color" : `hsl(${Math.floor(Math.random() * 300)}deg 100% 80%)`,
-      "description": "hello this is my first note on my application hello this is my first note on my application hello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my application",
-      "tag": "imp",
-      "date": "2022-09-25T06:47:04.026Z",
-      "__v": 0
-    },
-    {
-      "_id": "635fda318c1510cc573bb4fa",
-      "user": "631ecc1f5298db6a4ad9be46",
-      "title": "Note 3",
-      "color" : `hsl(${Math.floor(Math.random() * 300)}deg 100% 80%)`,
-      "description": "hello this is my first note on my application hello this is my first note on my application hello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my application",
-      "tag": "imp",
-      "date": "2022-10-31T14:22:41.954Z",
-      "__v": 0
-    },
-    {
-      "_id": "635fda318c1510cc573bb4fa",
-      "user": "631ecc1f5298db6a4ad9be46",
-      "title": "Note 4",
-      "color" : `hsl(${Math.floor(Math.random() * 300)}deg 100% 80%)`,
-      "description": "hello this is my first note on my application hello this is my first note on my application hello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my application kg dogfi dlfgwe lkdfgir d.kg dfkg sdfgdlg dgdslgsd gsdg sdgsd gdsgsd fg d",
-      "tag": "imp",
-      "date": "2022-10-31T14:22:41.954Z",
-      "__v": 0
-    },
-    {
-      "_id": "635fda318c1510cc573bb4fa",
-      "user": "631ecc1f5298db6a4ad9be46",
-      "title": "Note 5",
-      "color" : `hsl(${Math.floor(Math.random() * 300)}deg 100% 80%)`,
-      "description": "hello this is my first note on my application hello this is my first note on my application hello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my application",
-      "tag": "imp",
-      "date": "2022-10-31T14:22:41.954Z",
-      "__v": 0
-    },
-    {
-      "_id": "635fda318c1510cc573bb4fa",
-      "user": "631ecc1f5298db6a4ad9be46",
-      "title": "Note 6",
-      "color" : `hsl(${Math.floor(Math.random() * 300)}deg 100% 80%)`,
-      "description": "hello this is my first note on my application hello this is my first note on my application hello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my applicationhello this is my first note on my application",
-      "tag": "imp",
-      "date": "2022-10-31T14:22:41.954Z",
-      "__v": 0
-    }
-  ]
+
+  const host = "http://localhost:5000/api/";
+  const Notes= []
   const [notes, setNotes] = useState(Notes);
 
-  const addnotes= (title,des,tag)=>{
-      const note =  {
-        "_id": "635fda318c1510cc573bb4fa2",
-        "user": "631ecc1f5298db6a4ad9be46w",
-        "title": title,
-        "description": des,
-        "tag": tag,
-        "date": "2022-10-31T14:22:41.954Z",
-        "__v": 0
-      };
-      setNotes(notes.concat(note));
-
+  const addnotes= async(title,des,tag,color)=>{
+    try{
+    const reponse = await fetch("http://localhost:5000/api/note/addnote",{
+      method :'POST',
+      headers:{
+        'Content-Type':'application/json',
+        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+      },
+      body: JSON.stringify({
+        title:title,
+        description:des,
+        tag:tag,
+        color:color
+        })
+    });
+    console.log(reponse.json());
+    showAlert("Noted added successfully",'success');
+  }catch(err){
+    console.log(err);
   }
 
-  const deleteNote=(id)=>{
-      console.log("deleting note with id :",id);
-      const newnotes = notes.filter((note)=> {return note._id !==id})
-      setNotes(newnotes);
+
+}
+
+
+//   const updateNote= async(id,title,des,tag,color)=>{
+//     try{
+//     const reponse = await fetch(`http://localhost:5000/api/note/updatenote/${id}`,{
+//       method :'PUT',
+//       headers:{
+//         'Content-Type':'application/json',
+//         "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+//       },
+//       body: JSON.stringify({
+//         title:title,
+//         description:des,
+//         tag:tag,
+//         color:color
+//         })
+
+//     });
+//     console.log(reponse.json());
+//     showAlert("Noted added successfully",'success');
+//   }catch(err){
+//     console.log(err);
+//   }
+
+
+// }
+
+
+
+  const  getNotes= async()=>{
+   try{
+    const reponse = await fetch("http://localhost:5000/api/note/fetchallNotes",{
+      method :'GET',
+      headers:{
+        'Content-Type':'application/json',
+        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+      },
+    });
+   const data = await reponse.json();
+   console.log(data);
+   setNotes(data);
+  }catch(err){
+    console.log(err);
   }
+  }
+
+
+
+  const [alert, setalert] = useState(null);
+  const showAlert=(message,type)=>{
+    setalert({
+      msg:message,
+      type:type
+    })
+    setTimeout(() => {
+      setalert(null);
+    }, 1400);
+  }
+
+
+
+
+
+  const editNotes = async (id,title,tag,description,color)=>{
+
+    const reponse = await fetch(`${host}note/updatenote/${id}`,{
+      method :'PUT',
+      headers:{
+        'Content-Type':'application/json',
+        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+      },
+      body: JSON.stringify({title,tag,description,color})
+    });
+    getNotes();
+
+    const json  = reponse.json;
+    console.log(json);
+  }
+
+
+  const deleteNote= async(id)=>{
+    const reponse = await fetch(`${host}note/deletenote/${id}`,{
+      method :'DELETE',
+      headers:{
+        'Content-Type':'application/json',
+        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+      },
+    });
+      const json = reponse.json;
+      console.log(json);
+      getNotes();
+  }
+
+
+
+
   return (
-    <NoteContext.Provider value ={{notes,addnotes,deleteNote}}>
+    <NoteContext.Provider value ={{notes,addnotes,deleteNote,showAlert,alert,getNotes,editNotes}}>
     {props.children}
     </NoteContext.Provider>
   )

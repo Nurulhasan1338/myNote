@@ -3,8 +3,10 @@ import Notes from "./notes"
 
 const Home = () => {
   return (
-    <div>
+    <div className='container-fluid'>
      <Notes/>
+
+     {/* footer/ */}
     </div>
   )
 }

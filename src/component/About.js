@@ -1,10 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Mymodel from "./Mymodel"
 
 
 const About = () => {
   return (
-    <div>
-      this is about
+    <div className='mt-5'>
+    <Mymodel/>
     </div>
   )
 }
