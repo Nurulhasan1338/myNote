@@ -1,13 +1,19 @@
 import React, { useContext,useEffect } from "react";
 import notecontext from "./context/Notes/Notecontext.js";
 import Content from "./content.js";
+import { useNavigate } from "react-router-dom";
 
 const Notes = () => {
   const context = useContext(notecontext); // for using addnote function which we made in notestate
   const { deleteNote, notes,getNotes} = context;
+  const nevigate = useNavigate();
 
   useEffect(()=>{
-    getNotes();
+    if(localStorage.getItem('token')){
+      getNotes();
+    }else{
+    nevigate('/');
+    }
   
   },[])
 

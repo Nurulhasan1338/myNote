@@ -7,6 +7,8 @@ export default function Notesate(props) {
   const host = "http://localhost:5000/api/";
   const Notes= []
   const [notes, setNotes] = useState(Notes);
+  // eslint-disable-next-line
+  const [token,setToken] = useState("");
 
   const addnotes= async(title,des,tag,color)=>{
     try{
@@ -14,7 +16,7 @@ export default function Notesate(props) {
       method :'POST',
       headers:{
         'Content-Type':'application/json',
-        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+        "auth-token":localStorage.getItem('token')
       },
       body: JSON.stringify({
         title:title,
@@ -33,50 +35,22 @@ export default function Notesate(props) {
 }
 
 
-//   const updateNote= async(id,title,des,tag,color)=>{
-//     try{
-//     const reponse = await fetch(`http://localhost:5000/api/note/updatenote/${id}`,{
-//       method :'PUT',
-//       headers:{
-//         'Content-Type':'application/json',
-//         "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
-//       },
-//       body: JSON.stringify({
-//         title:title,
-//         description:des,
-//         tag:tag,
-//         color:color
-//         })
-
-//     });
-//     console.log(reponse.json());
-//     showAlert("Noted added successfully",'success');
-//   }catch(err){
-//     console.log(err);
-//   }
-
-
-// }
-
-
-
   const  getNotes= async()=>{
    try{
     const reponse = await fetch("http://localhost:5000/api/note/fetchallNotes",{
       method :'GET',
       headers:{
         'Content-Type':'application/json',
-        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+        "auth-token":localStorage.getItem('token')
       },
     });
    const data = await reponse.json();
    console.log(data);
    setNotes(data);
   }catch(err){
-    console.log(err);
+    showAlert(err,"danger");
   }
   }
-
 
 
   const [alert, setalert] = useState(null);
@@ -91,16 +65,13 @@ export default function Notesate(props) {
   }
 
 
-
-
-
   const editNotes = async (id,title,tag,description,color)=>{
 
     const reponse = await fetch(`${host}note/updatenote/${id}`,{
       method :'PUT',
       headers:{
         'Content-Type':'application/json',
-        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+        "auth-token":localStorage.getItem('token')
       },
       body: JSON.stringify({title,tag,description,color})
     });
@@ -116,7 +87,7 @@ export default function Notesate(props) {
       method :'DELETE',
       headers:{
         'Content-Type':'application/json',
-        "auth-token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjRhMzExOWZjNDkyZGIxYTMwMjVhYWFiIn0sImlhdCI6MTY4ODQwODQ3OX0.hvtn5uDVHT7UyC911I8VBe3J8u5NhxoyajHQ3MCfO_o"
+        "auth-token":localStorage.getItem('token')
       },
     });
       const json = reponse.json;
@@ -124,11 +95,8 @@ export default function Notesate(props) {
       getNotes();
   }
 
-
-
-
   return (
-    <NoteContext.Provider value ={{notes,addnotes,deleteNote,showAlert,alert,getNotes,editNotes}}>
+    <NoteContext.Provider value ={{notes,addnotes,deleteNote,showAlert,alert,getNotes,editNotes,setToken}}>
     {props.children}
     </NoteContext.Provider>
   )

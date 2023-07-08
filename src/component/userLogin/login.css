@@ -1,0 +1,10 @@
+.login{
+    background-color: rgba(0, 0, 0, 0.551);
+    border-radius: 12px;
+    width: 32rem;
+    padding: 10px;
+}
+
+.outer{
+    min-height: 90vh;
+}

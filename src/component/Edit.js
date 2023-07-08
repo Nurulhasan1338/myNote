@@ -6,7 +6,7 @@ const Edit = (props) => {
     const context = useContext(notecontext);
     const {editNotes,showAlert } = context;
 
-    const [note, setNote] = useState({ title: "", description: "", tag: "", color:""})
+    const [note, setNote] = useState({ title:props.title, description:props.description, tag:props.tag, color:props.color})
     const onChange = (e) => {
         setNote({ ...note, [e.target.name]: e.target.value })
       }
@@ -21,7 +21,9 @@ const Edit = (props) => {
       }
   return (
 <div>
-<Button data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" variant="plain" color="warning"><i class="fa-regular fa-pen-to-square"></i></Button>
+<Button data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap" variant="outline" color="info">
+<i class="fa-regular fa-pen-to-square"></i>
+      </Button>
 <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
@@ -40,6 +42,7 @@ const Edit = (props) => {
                 type="text"
                 className="form-control "
                 id="title"
+                value = {note.title}
                 name="title"
                 onChange={onChange}
                 placeholder="topic"
@@ -54,6 +57,7 @@ const Edit = (props) => {
                 type="text"
                 className="form-control "
                 id="tag"
+                value = {note.tag}
                 name="tag"
                 onChange={onChange}
                 placeholder="Tag"
@@ -65,6 +69,7 @@ const Edit = (props) => {
               <input 
                 type="color"
                 name='color' 
+                value = {note.color}
                 class="form-control form-control-color d-flex align-items-center" 
                 id="exampleColorInput" 
                 onChange={onChange}
@@ -79,6 +84,7 @@ const Edit = (props) => {
                 type="text"
                 id="description"
                 name="description"
+                value = {note.description}
                 rows="5"
                 cols="40"
                 onChange={onChange}

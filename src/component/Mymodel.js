@@ -5,7 +5,6 @@ import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import Edit from "./Edit.js"
-import Tag from "./Tag.js"
 import { CssVarsProvider } from '@mui/joy/styles';
 
 
@@ -55,7 +54,7 @@ export default function Mymodel(props) {
              <span className="badge bg-secondary" style={{fontSize:"20px", position: "relative" ,top: "-35px", left: "-40px"}} >{props.tag}</span>
             <div className='d-flex justify-content-between'>
            {props.title}  
-           <Edit id = {props.id} title = {props.title} tag = {props.tag} description = {props.description}/>
+           <Edit id = {props.id} title = {props.title} tag = {props.tag} description = {props.description} color = {props.color}/>
            
       </div>
           </Typography>
