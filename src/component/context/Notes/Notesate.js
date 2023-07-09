@@ -96,6 +96,9 @@ export default function Notesate(props) {
       getNotes();
   }
 
+
+
+  
   return (
     <NoteContext.Provider value ={{notes,addnotes,deleteNote,showAlert,alert,getNotes,editNotes,setToken}}>
     {props.children}
