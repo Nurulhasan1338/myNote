@@ -1,10 +1,11 @@
 import React from 'react';
 import { useState } from 'react';
 import NoteContext from './Notecontext.js';
+import address from "../../config.js"
 
 export default function Notesate(props) {
+  const host = address;
 
-  const host = "http://localhost:5000/api/";
   const Notes= []
   const [notes, setNotes] = useState(Notes);
   // eslint-disable-next-line
@@ -12,7 +13,7 @@ export default function Notesate(props) {
 
   const addnotes= async(title,des,tag,color)=>{
     try{
-    const reponse = await fetch("http://localhost:5000/api/note/addnote",{
+    const reponse = await fetch(`${host}api/note/addnote`,{
       method :'POST',
       headers:{
         'Content-Type':'application/json',
@@ -37,7 +38,7 @@ export default function Notesate(props) {
 
   const  getNotes= async()=>{
    try{
-    const reponse = await fetch("http://localhost:5000/api/note/fetchallNotes",{
+    const reponse = await fetch(`${host}api/note/fetchallNotes`,{
       method :'GET',
       headers:{
         'Content-Type':'application/json',
@@ -67,7 +68,7 @@ export default function Notesate(props) {
 
   const editNotes = async (id,title,tag,description,color)=>{
 
-    const reponse = await fetch(`${host}note/updatenote/${id}`,{
+    const reponse = await fetch(`${host}api/note/updatenote/${id}`,{
       method :'PUT',
       headers:{
         'Content-Type':'application/json',
@@ -83,7 +84,7 @@ export default function Notesate(props) {
 
 
   const deleteNote= async(id)=>{
-    const reponse = await fetch(`${host}note/deletenote/${id}`,{
+    const reponse = await fetch(`${host}api/note/deletenote/${id}`,{
       method :'DELETE',
       headers:{
         'Content-Type':'application/json',

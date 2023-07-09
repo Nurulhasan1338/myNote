@@ -3,8 +3,13 @@ import Button from "@mui/material/Button";
 import notecontext from "../context/Notes/Notecontext";
 import { useNavigate} from "react-router-dom";
 import "./login.css";
+import add from "../config.js";
+
 
 const Login = () => {
+
+  const host = add;
+
   const context = useContext(notecontext);
   const { showAlert,} = context;
   const history = useNavigate();
@@ -18,7 +23,7 @@ const Login = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:5000/api/auth/login",
+        `${host}api/auth/login`,
         {
           method: "POST",
           headers: {
